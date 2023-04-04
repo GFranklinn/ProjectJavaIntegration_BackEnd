@@ -20,9 +20,9 @@
         <property name="format_sql">false</property>
 
         <!-- Entity classes -->
-        <mapping class="model.LineEnum"/>
-        <mapping class="model.CategoryEnum"/>
-        <mapping class="model.ModelEnum"/>
+        <mapping class="model.EntityLine"/>
+        <mapping class="model.EntityCategory"/>
+        <mapping class="model.EntityModel"/>
 
     </session-factory>
 </hibernate-configuration>
