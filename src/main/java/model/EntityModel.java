@@ -6,35 +6,26 @@ import javax.persistence.*;
 @Table(name = "table_model")
 public class EntityModel {
 
-	@Id
-	@Column(name = "id", columnDefinition = "int")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
 
-	@ManyToOne
-	@JoinColumn(name = "id_category", columnDefinition = "int")
-	private EntityCategory entityCategory;
+    @ManyToOne
+    @JoinColumn(name = "id_category", columnDefinition = "int")
+    private EntityCategory id_category;
 
-	@Column(name = "name")
-	private String name;
+    public EntityModel() {
+    }
 
-	public EntityModel(){}
+    EntityModel(EntityCategory id_category, int id, String name) {
+        this.id_category = id_category;
+        this.id = id;
+        this.name = name;
+    }
 
-	EntityModel(EntityCategory entityCategory, Long id) {
-		this.entityCategory = entityCategory;
-		this.id = id;
-	}
-
-	public EntityCategory getEntityCategory() {
-		return entityCategory;
-	}
-
-	public void setEntityCategory(EntityCategory entityCategory) {
-		this.entityCategory = entityCategory;
-	}
-
-	@Override
-	public String toString() {
-		return name;
-	}
+    @Override
+    public String toString() {
+        return name;
+    }
 }

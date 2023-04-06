@@ -7,30 +7,24 @@ import javax.persistence.*;
 public class EntityCategory {
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
+	private String name;
 
 	@ManyToOne
 	@JoinColumn(name = "id_line", columnDefinition = "int")
-	private EntityLine entityLine;
-
-	@Column(name = "name")
-	private String name;
+	private EntityLine id_line;
 
 	public EntityCategory() {}
 
-	public EntityCategory(EntityLine entityLine, Long id) {
-		this.entityLine = entityLine;
+	public EntityCategory(EntityLine id_line, int id, String name) {
+		this.id_line = id_line;
 		this.id = id;
+		this.name = name;
 	}
 
-	public EntityLine getEntityLine(){
-		return entityLine;
-	}
-
-	public void setEntityLine(EntityLine entityLine) {
-		this.entityLine = entityLine;
+	public int getId() {
+		return id;
 	}
 
 	@Override
