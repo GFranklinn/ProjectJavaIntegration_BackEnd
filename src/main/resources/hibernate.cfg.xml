@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="connection.url">jdbc:postgresql://localhost:5432/database_integration</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.username">postgres</property> <!-- User DataBase -->
+        <property name="connection.password">Gabriel.1</property> <!-- Password DataBase -->
+
+        <!-- SQL Dialect -->
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+
+        <!-- Show SQL in console -->
+        <property name="show_sql">false</property>
+        <!-- Show  formatted SQL -->
+        <property name="format_sql">true</property>
+
+        <mapping class="model.EntityLine"/>
+        <mapping class="model.EntityCategory"/>
+        <mapping class="model.EntityModel"/>
+
+    </session-factory>
+</hibernate-configuration>
