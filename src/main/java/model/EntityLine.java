@@ -11,7 +11,6 @@ public class EntityLine {
     private int id;
     private String name;
 
-
     public EntityLine() {
     }
 
