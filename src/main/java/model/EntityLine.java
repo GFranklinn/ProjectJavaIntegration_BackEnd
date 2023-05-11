@@ -1,6 +1,9 @@
 package model;
 
 import javax.persistence.*;
+import java.util.List;
+
+import helper.DataBaseHelper;
 
 @Entity
 @Table(name = "table_line")
@@ -10,7 +13,6 @@ public class EntityLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-
 
     public EntityLine() {
     }
@@ -27,5 +29,10 @@ public class EntityLine {
     @Override
     public String toString() {
         return name;
+    }
+
+    public static List<EntityLine> getListLine() {
+        List<EntityLine> listLine = DataBaseHelper.getInstance().createQuery("FROM EntityLine ").list();
+        return listLine;
     }
 }
