@@ -5,7 +5,6 @@ import util.HibernateUtil;
 
 public class DataBaseHelper {
 
-    public DataBaseHelper() {}
     private static Session session;
 
     public static Session getInstance() {
