@@ -1,9 +1,8 @@
-package helper;
+package util;
 
 import org.hibernate.Session;
-import util.HibernateUtil;
 
-public class DataBaseHelper {
+public class HibernateUtilFactory {
 
     private static Session session;
 

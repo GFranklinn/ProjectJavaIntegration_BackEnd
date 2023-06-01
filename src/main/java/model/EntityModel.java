@@ -1,13 +1,13 @@
 package model;
 
-import helper.DataBaseHelper;
+import util.HibernateUtilFactory;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "table_model")
-public class EntityModel {
+public class EntityModel implements EntityInterface{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class EntityModel {
     }
 
     public static List<EntityModel> getListModel(EntityCategory entityCategory) {
-        List<EntityModel> listModel = DataBaseHelper.getInstance().createQuery(String.format("FROM EntityModel WHERE id_category = '%s'", entityCategory.getId())).list();
+        List<EntityModel> listModel = HibernateUtilFactory.getInstance().createQuery(String.format("FROM EntityModel WHERE id_category = '%s'", entityCategory.getId())).list();
         return listModel;
     }
 }

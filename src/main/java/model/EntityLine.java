@@ -3,11 +3,11 @@ package model;
 import javax.persistence.*;
 import java.util.List;
 
-import helper.DataBaseHelper;
+import util.HibernateUtilFactory;
 
 @Entity
 @Table(name = "table_line")
-public class EntityLine {
+public class EntityLine implements EntityInterface{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +32,7 @@ public class EntityLine {
     }
 
     public static List<EntityLine> getListLine() {
-        List<EntityLine> listLine = DataBaseHelper.getInstance().createQuery("FROM EntityLine ").list();
+        List<EntityLine> listLine = HibernateUtilFactory.getInstance().createQuery("FROM EntityLine ").list();
         return listLine;
     }
 }

@@ -1,13 +1,13 @@
 package model;
 
-import helper.DataBaseHelper;
+import util.HibernateUtilFactory;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "table_category")
-public class EntityCategory {
+public class EntityCategory implements EntityInterface{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class EntityCategory {
 	}
 
 	public static List<EntityCategory> getListCategory(EntityLine cbbLineSelected) {
-		List<EntityCategory> listCategory = DataBaseHelper.getInstance().createQuery(String.format("FROM EntityCategory WHERE id_line = '%s'", cbbLineSelected.getId())).list();
+		List<EntityCategory> listCategory = HibernateUtilFactory.getInstance().createQuery(String.format("FROM EntityCategory WHERE id_line = '%s'", cbbLineSelected.getId())).list();
 		return listCategory;
 	}
 }
