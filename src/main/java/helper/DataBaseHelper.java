@@ -1,10 +1,13 @@
-package util;
+package helper;
 
 import org.hibernate.Session;
+import util.HibernateUtil;
 
-public class HibernateUtilFactory {
+public class DataBaseHelper {
 
     private static Session session;
+
+    private DataBaseHelper(){}
 
     public static Session getInstance() {
         if (session == null) {

@@ -1,6 +1,9 @@
 package model;
 
-import util.HibernateUtilFactory;
+import dao.EntityCategoryDaoImpl;
+import dao.EntityModelDao;
+import dao.EntityModelDaoImpl;
+import helper.DataBaseHelper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,8 +35,18 @@ public class EntityModel implements EntityInterface{
         return name;
     }
 
-    public static List<EntityModel> getListModel(EntityCategory entityCategory) {
-        List<EntityModel> listModel = HibernateUtilFactory.getInstance().createQuery(String.format("FROM EntityModel WHERE id_category = '%s'", entityCategory.getId())).list();
-        return listModel;
+    public void save() {
+        EntityModelDaoImpl modelDao = new EntityModelDaoImpl();
+        modelDao.save(this);
+    }
+
+    public void update() {
+        EntityModelDaoImpl modelDao = new EntityModelDaoImpl();
+        modelDao.update(this);
+    }
+
+    public void delete() {
+        EntityModelDaoImpl modelDao = new EntityModelDaoImpl();
+        modelDao.delete(this);
     }
 }
