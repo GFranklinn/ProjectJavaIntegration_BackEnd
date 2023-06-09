@@ -1,12 +1,7 @@
 package model;
 
-import dao.EntityCategoryDaoImpl;
-import dao.EntityModelDao;
 import dao.EntityModelDaoImpl;
-import helper.DataBaseHelper;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "table_model")

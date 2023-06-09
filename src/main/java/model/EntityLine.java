@@ -1,10 +1,7 @@
     package model;
 
     import javax.persistence.*;
-    import java.util.List;
-
     import dao.EntityLineDaoImpl;
-    import helper.DataBaseHelper;
 
     @Entity
     @Table(name = "table_line")

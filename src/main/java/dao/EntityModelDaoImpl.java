@@ -11,7 +11,7 @@ public class EntityModelDaoImpl implements EntityModelDao{
     public void save(EntityModel model) {
         DataBaseHelper.getInstance().save(model);
     }
-
+    
     public void update(EntityModel model) {
         DataBaseHelper.getInstance().update(model);
     }

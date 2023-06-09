@@ -20,7 +20,7 @@ public class EntityLineDaoImpl implements EntityLineDao{
     }
 
     public List<EntityLine> getListLine() {
-        return DataBaseHelper.getInstance().createQuery("FROM EntityLine ", EntityLine.class).list();
+        return DataBaseHelper.getInstance().createQuery("FROM EntityLine ").list();
     }
 }
 

@@ -1,11 +1,8 @@
 package model;
 
-import dao.EntityCategoryDao;
 import dao.EntityCategoryDaoImpl;
-import helper.DataBaseHelper;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "table_category")
@@ -21,6 +18,7 @@ public class EntityCategory implements EntityInterface {
 	private EntityLine id_line;
 
 	public EntityCategory(){}
+
 	public EntityCategory(EntityLine id_line, int id, String name) {
 		this.id_line = id_line;
 		this.id = id;
