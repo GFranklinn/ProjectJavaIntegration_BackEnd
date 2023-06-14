@@ -1,6 +1,9 @@
 package model;
 
+import helper.DataBaseHelper;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "table_model")
@@ -27,5 +30,9 @@ public class EntityModel {
     @Override
     public String toString() {
         return name;
+    }
+
+    public static List<EntityModel> getListModel(EntityCategory entityCategory) {
+        return DataBaseHelper.getInstance().createQuery(String.format("FROM EntityModel WHERE id_category = '%s'", entityCategory.getId())).list();
     }
 }

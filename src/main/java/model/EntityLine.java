@@ -1,6 +1,9 @@
 package model;
 
+import helper.DataBaseHelper;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "table_line")
@@ -26,5 +29,9 @@ public class EntityLine {
     @Override
     public String toString() {
         return name;
+    }
+
+    public static List<EntityLine> getListLine() {
+        return DataBaseHelper.getInstance().createQuery("FROM EntityLine ").list();
     }
 }

@@ -1,6 +1,9 @@
 package model;
 
+import helper.DataBaseHelper;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "table_category")
@@ -32,5 +35,7 @@ public class EntityCategory {
 		return name;
 	}
 
-
+	public static List<EntityCategory> getListCategory(EntityLine cbbLineSelected) {
+		return DataBaseHelper.getInstance().createQuery(String.format("FROM EntityCategory WHERE id_line = '%s '", cbbLineSelected.getId())).list();
+		}
 }
