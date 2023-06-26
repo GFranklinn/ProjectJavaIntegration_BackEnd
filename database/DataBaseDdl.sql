@@ -21,4 +21,4 @@ CREATE TABLE table_model(
 	id_category int NOT NULL,
 	FOREIGN KEY(id_category)
 		REFERENCES table_category(id)
-);
+):
