@@ -12,10 +12,8 @@ public class EntityLine {
     @Type(type = "org.hibernate.type.IntegerType")
     private int id;
     private String name;
-
     public EntityLine() {
     }
-
     public void setId(int id) {
         this.id = id;
     }
