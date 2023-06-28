@@ -7,6 +7,7 @@ import org.hibernate.annotations.Type;
 @Table(name = "table_line")
 public class EntityLine {
 
+    //Entity
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Type(type = "org.hibernate.type.IntegerType")
