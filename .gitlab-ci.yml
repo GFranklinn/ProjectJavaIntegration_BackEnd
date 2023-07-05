@@ -10,7 +10,7 @@
 # For general lifecycle information see https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
 
 # This template will build and test your projects
-# * Caches downloaded dependencies and plugins between invocation.
+# * Caches downloaded dependencies and plugins between invocations.
 # * Verify but don't deploy merge requests.
 # * Deploy built artifacts from master branch only.
 
@@ -21,29 +21,15 @@ variables:
     -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
-
-  # As of Maven 3.3.0 instead of this you MAY define these options in `.mvn/maven.config` so the same config is used
-  # when running from the command line.
-  # As of Maven 3.6.1, the use of `--no-tranfer-progress` (or `-ntp`) suppresses download and upload messages. The use
-  # of the `Slf4jMavenTransferListener` is no longer necessary.
-  # `installAtEnd` and `deployAtEnd` are only effective with recent version of the corresponding plugins.
-  MAVEN_CLI_OPTS: >-
-    --batch-mode
-    --errors
-    --fail-at-end
-    --show-version
-    --no-transfer-progress
-    -DinstallAtEnd=true
-    -DdeployAtEnd=true
+    - "-d32"
 
 # This template uses the latest Maven 3 release, e.g., 3.8.6, and OpenJDK 8 (LTS)
 # for verifying and deploying images
 # Maven 3.8.x REQUIRES HTTPS repositories.
 # See https://maven.apache.org/docs/3.8.1/release-notes.html#how-to-fix-when-i-get-a-http-repository-blocked for more.
 image:
-  name: adoptopenjdk/openjdk8
+  name: adoptopenjdk/openjdk8:latest-x86
   entrypoint: [""]
-  JAVA_OPTS: "-d32"
 
 # Cache downloaded dependencies and plugins between builds.
 # To keep cache across branches add 'key: "$CI_JOB_NAME"'
@@ -58,12 +44,14 @@ cache:
 .verify:
   stage: test
   script:
-    - 'mvn $MAVEN_CLI_OPTS clean'
-    - 'mvn $MAVEN_CLI_OPTS test'
-    - 'mvn $MAVEN_CLI_OPTS install -DskipTests'
+    - 'export JAVA_HOME="/opt/java/openjdk"'
+    - 'export PATH="$JAVA_HOME/bin:$PATH"'
+    - 'mvn $MAVEN_OPTS clean'
+    - 'mvn $MAVEN_OPTS test'
+    - 'mvn $MAVEN_OPTS install -DskipTests'
   except:
     variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      - $CI_COMMIT_BRANCH != "develop"
 
 # Verify merge requests using JDK8
 verify:jdk8:
@@ -78,9 +66,9 @@ deploy:jdk8:
   stage: deploy
   script:
     - if [ ! -f ci_settings.xml ]; then
-        echo "CI settings missing\! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/packages/maven_repository/index.html#create-maven-packages-with-gitlab-cicd for instructions.";
+        echo "CI settings missing! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/packages/maven_repository/index.html#create-maven-packages-with-gitlab-cicd for instructions.";
       fi
-    - 'mvn $MAVEN_CLI_OPTS deploy --settings ci_settings.xml'
+    - 'mvn $MAVEN_OPTS deploy --settings ci_settings.xml'
   only:
     variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      - $CI_COMMIT_BRANCH == "master"
