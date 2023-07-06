@@ -12,14 +12,10 @@ variables:
     -DinstallAtEnd=true
     -DdeployAtEnd=true
 
-image:
-  name: adoptopenjdk/openjdk8:latest-x86
-  entrypoint: [""]
-
 cache:
   paths:
     - .m2/repository
- 
+
 stages:
   - clean
   - test
@@ -29,37 +25,35 @@ stages:
 clean:
   stage: clean
   script:
-    - 'export JAVA_HOME="/opt/java/openjdk"'
-    - 'export PATH="$JAVA_HOME/bin:$PATH"'
-    - 'mvn $MAVEN_OPTS clean'
+    - 'java -version'
+    - 'mvn clean'
   only:
     - master
 
 test:
   stage: test
   script:
-    - 'export JAVA_HOME="/opt/java/openjdk"'
-    - 'export PATH="$JAVA_HOME/bin:$PATH"'
-    - 'mvn $MAVEN_OPTS test'
+    - 'java -version'
+    - 'mvn test'
   only:
     - master
 
 install:
   stage: install
   script:
-    - 'export JAVA_HOME="/opt/java/openjdk"'
-    - 'export PATH="$JAVA_HOME/bin:$PATH"'
-    - 'mvn $MAVEN_OPTS install -DskipTests'
+    - 'java -version'
+    - 'mvn install -DskipTests'
   only:
     - master
 
 deploy:
   stage: deploy
   script:
+    - 'java -version'
     - if [ ! -f ci_settings.xml ]; then
-        echo "CI settings missing\! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/packages/maven_repository/index.html#create-maven-packages-with-gitlab-cicd for instructions.";
+        echo "CI settings missing! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/packages/maven_repository/index.html#create-maven-packages-with-gitlab-cicd for instructions.";
       fi
     - 'mvn $MAVEN_CLI_OPTS deploy --settings ci_settings.xml'
   only:
     variables:
-      - $CI_COMMIT_BRANCH == "master"
+      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
