@@ -1,0 +1,64 @@
+variables:
+  MAVEN_OPTS: >-
+    -Dhttps.protocols=TLSv1.2
+    -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+    -Dorg.slf4j.simpleLogger.showDateTime=true
+    -Djava.awt.headless=true
+    - "-d32"
+  MAVEN_CLI_OPTS: >-
+    --batch-mode
+    --errors
+    --show-version
+    -DinstallAtEnd=true
+    -DdeployAtEnd=true
+
+image:
+  name: adoptopenjdk/openjdk8:latest-x86
+  entrypoint: [""]
+
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+  - clean
+  - test
+  - install
+
+clean:
+  stage: clean
+  script:
+    - 'export JAVA_HOME="/opt/java/openjdk"'
+    - 'export PATH="$JAVA_HOME/bin:$PATH"'
+    - 'mvn $MAVEN_OPTS clean'
+  only:
+    - master
+
+test:
+  stage: test
+  script:
+    - 'export JAVA_HOME="/opt/java/openjdk"'
+    - 'export PATH="$JAVA_HOME/bin:$PATH"'
+    - 'mvn $MAVEN_OPTS test'
+  only:
+    - master
+
+install:
+  stage: install
+  script:
+    - 'export JAVA_HOME="/opt/java/openjdk"'
+    - 'export PATH="$JAVA_HOME/bin:$PATH"'
+    - 'mvn $MAVEN_OPTS install -DskipTests'
+  only:
+    - master
+
+deploy:jdk8:
+  stage: deploy
+  script:
+    - if [ ! -f ci_settings.xml ]; then
+        echo "CI settings missing\! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/packages/maven_repository/index.html#create-maven-packages-with-gitlab-cicd for instructions.";
+      fi
+    - 'mvn $MAVEN_CLI_OPTS deploy --settings ci_settings.xml'
+  only:
+    variables:
+      - $CI_COMMIT_BRANCH == "master"
