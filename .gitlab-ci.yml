@@ -24,6 +24,7 @@ stages:
   - clean
   - test
   - install
+  - deploy
 
 clean:
   stage: clean
@@ -52,7 +53,7 @@ install:
   only:
     - master
 
-deploy:jdk8:
+deploy:
   stage: deploy
   script:
     - if [ ! -f ci_settings.xml ]; then
