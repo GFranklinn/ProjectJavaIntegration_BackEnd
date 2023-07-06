@@ -4,7 +4,6 @@ variables:
     -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
     -Dorg.slf4j.simpleLogger.showDateTime=true
     -Djava.awt.headless=true
-    - "-d32"
   MAVEN_CLI_OPTS: >-
     --batch-mode
     --errors
