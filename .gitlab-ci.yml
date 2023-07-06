@@ -19,7 +19,7 @@ image:
 cache:
   paths:
     - .m2/repository
-
+ 
 stages:
   - clean
   - test
