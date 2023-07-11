@@ -2,7 +2,6 @@ cache:
   paths:
     - .m2/repository
 
-
 stages:
   - clean
   - test
@@ -11,21 +10,23 @@ stages:
 clean:
   stage: clean
   script:
-    - 'mvn clean'
+    - echo $JAVA_HOME
+    - mvn clean
   only:
     - master
 
 test:
   stage: test
   script:
-    - 'mvn test'
+    - echo $JAVA_HOME
+    - mvn test
   only:
     - master
 
 install:
   stage: install
   script:
-    - 'mvn install -DskipTests'
+    - echo $JAVA_HOME
+    - mvn install -DskipTests
   only:
     - master
-
