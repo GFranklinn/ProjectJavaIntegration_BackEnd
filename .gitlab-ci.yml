@@ -1,0 +1,32 @@
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+  - clean
+  - test
+  - install
+
+clean:
+  stage: clean
+  script:
+    - echo $JAVA_HOME
+    - mvn clean
+  only:
+    - develop
+
+test:
+  stage: test
+  script:
+    - echo $JAVA_HOME
+    - mvn test
+  only:
+    - develop
+
+install:
+  stage: install
+  script:
+    - echo $JAVA_HOME
+    - mvn install -DskipTests
+  only:
+    - develop
