@@ -23,7 +23,6 @@ stages:
 clean:
   stage: clean
   script:
-    - 'java -version'
     - 'mvn clean'
   only:
     - develop
@@ -31,7 +30,6 @@ clean:
 test:
   stage: test
   script:
-    - 'java -version'
     - 'mvn test'
   only:
     - develop
@@ -39,8 +37,6 @@ test:
 install:
   stage: install
   script:
-    - 'java -version'
-    - 'type pom.xml'
     - 'mvn install -DskipTests'
   only:
     - develop
