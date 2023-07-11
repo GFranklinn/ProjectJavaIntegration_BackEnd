@@ -40,7 +40,7 @@ install:
   stage: install
   script:
     - 'java -version'
-    - 'cat pom.xml'
+    - 'type pom.xml'
     - 'mvn install -DskipTests'
   only:
     - develop
