@@ -26,7 +26,7 @@ clean:
     - 'java -version'
     - 'mvn clean'
   only:
-    - master
+    - develop
 
 test:
   stage: test
@@ -34,7 +34,7 @@ test:
     - 'java -version'
     - 'mvn test'
   only:
-    - master
+    - develop
 
 install:
   stage: install
@@ -42,4 +42,4 @@ install:
     - 'java -version'
     - 'mvn install -DskipTests'
   only:
-    - master
+    - develop
