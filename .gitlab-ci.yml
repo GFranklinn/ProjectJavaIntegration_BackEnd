@@ -10,20 +10,20 @@ stages:
 clean:
   stage: clean
   script:
-    - 'mvn clean'
+    - mvn clean
   only:
     - develop
 
 test:
   stage: test
   script:
-    - 'mvn test'
+    - mvn test
   only:
     - develop
 
 install:
   stage: install
   script:
-    - 'mvn install -DskipTests'
+    - mvn install -DskipTests
   only:
     - develop
