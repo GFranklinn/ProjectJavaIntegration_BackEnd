@@ -1,15 +1,7 @@
-variables:
-  MAVEN_OPTS: >-
-    -Dhttps.protocols=TLSv1.2
-    -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
-    -Dorg.slf4j.simpleLogger.showDateTime=true
-    -Djava.awt.headless=true
-  MAVEN_CLI_OPTS: >-
-    --batch-mode
-    --errors
-    --show-version
-    -DinstallAtEnd=true
-    -DdeployAtEnd=true
+cache:
+  paths:
+    - .m2/repository
+
 
 stages:
   - clean
@@ -19,7 +11,6 @@ stages:
 clean:
   stage: clean
   script:
-    - 'java -version'
     - 'mvn clean'
   only:
     - master
@@ -27,7 +18,6 @@ clean:
 test:
   stage: test
   script:
-    - 'java -version'
     - 'mvn test'
   only:
     - master
@@ -35,7 +25,6 @@ test:
 install:
   stage: install
   script:
-    - 'java -version'
     - 'mvn install -DskipTests'
   only:
     - master
