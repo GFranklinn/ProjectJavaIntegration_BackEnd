@@ -1,9 +1,7 @@
-package model;
-
-import helper.DataBaseHelper;
+package com.java.projectintegration.model;
 
 import javax.persistence.*;
-import java.util.List;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "table_line")
@@ -11,10 +9,21 @@ public class EntityLine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Type(type = "org.hibernate.type.IntegerType")
     private int id;
     private String name;
-
     public EntityLine() {
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public EntityLine(int id, String name) {
@@ -31,7 +40,4 @@ public class EntityLine {
         return name;
     }
 
-    public static List<EntityLine> getListLine() {
-        return DataBaseHelper.getInstance().createQuery("FROM EntityLine ").list();
-    }
 }
