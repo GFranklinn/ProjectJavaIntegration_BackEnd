@@ -13,7 +13,7 @@ clean:
     - echo $JAVA_HOME
     - mvn clean
   only:
-    - develop
+    - master
 
 test:
   stage: test
@@ -21,7 +21,7 @@ test:
     - echo $JAVA_HOME
     - mvn test
   only:
-    - develop
+    - master
 
 install:
   stage: install
@@ -29,4 +29,4 @@ install:
     - echo $JAVA_HOME
     - mvn install -DskipTests
   only:
-    - develop
+    - master
