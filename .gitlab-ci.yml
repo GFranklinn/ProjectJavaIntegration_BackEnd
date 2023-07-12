@@ -10,8 +10,7 @@ stages:
 clean:
   stage: clean
   script:
-    - set JAVA_HOME=$JAVA_HOME
-    - echo $JAVA_HOME
+    - echo JAVA_HOME=$JAVA_HOME
     - mvn clean
   only:
     - develop
@@ -19,8 +18,7 @@ clean:
 test:
   stage: test
   script:
-    - set JAVA_HOME=$JAVA_HOME
-    - echo $JAVA_HOME
+    - echo JAVA_HOME=$JAVA_HOME
     - mvn test
   only:
     - develop
@@ -28,8 +26,7 @@ test:
 install:
   stage: install
   script:
-    - set JAVA_HOME=$JAVA_HOME
-    - echo $JAVA_HOME
+    - echo JAVA_HOME=$JAVA_HOME
     - mvn install -DskipTests
   only:
     - develop
