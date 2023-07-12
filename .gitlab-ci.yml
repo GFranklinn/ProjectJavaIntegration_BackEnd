@@ -10,6 +10,7 @@ stages:
 clean:
   stage: clean
   script:
+    - export JAVA_HOME=$JAVA_HOME
     - echo $JAVA_HOME
     - mvn clean
   only:
@@ -18,6 +19,7 @@ clean:
 test:
   stage: test
   script:
+    - export JAVA_HOME=$JAVA_HOME
     - echo $JAVA_HOME
     - mvn test
   only:
@@ -26,6 +28,7 @@ test:
 install:
   stage: install
   script:
+    - export JAVA_HOME=$JAVA_HOME
     - echo $JAVA_HOME
     - mvn install -DskipTests
   only:
