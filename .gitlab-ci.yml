@@ -10,7 +10,6 @@ stages:
 clean:
   stage: clean
   script:
-    - echo $JAVA_HOME
     - mvn clean
   only:
     - master
@@ -18,7 +17,6 @@ clean:
 test:
   stage: test
   script:
-    - echo $JAVA_HOME
     - mvn test
   only:
     - master
@@ -26,7 +24,6 @@ test:
 install:
   stage: install
   script:
-    - echo $JAVA_HOME
     - mvn install -DskipTests
   only:
     - master
